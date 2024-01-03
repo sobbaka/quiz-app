@@ -1,9 +1,7 @@
 import Button from "./Button"
-import NextButton from "./NextButton"
 
-export default function Options({ question, userAnswer, dispatch, answers }) {
+export default function Options({ question, userAnswer, hasAnswered, dispatch, answers }) {
 
-    const hasAnswered = userAnswer != null
     return (
         <>
             <div>
@@ -17,7 +15,7 @@ export default function Options({ question, userAnswer, dispatch, answers }) {
                         hasAnswered={hasAnswered}
                     />)}
             </div>
-            {hasAnswered && <NextButton dispatch={dispatch} />}
+
         </>
     )
 }
