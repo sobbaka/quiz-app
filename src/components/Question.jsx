@@ -18,7 +18,7 @@ export default function Question({ questions, index, dispatch, userAnswer, answe
 
     return (
         <>
-            <h2 className="mt-4 mb-3">{question.question.replaceAll('&quot;', '').replaceAll('&#039;', '')}</h2>
+            <h2 className="mt-4 mb-3 text-center">{question.question.replaceAll('&quot;', '').replaceAll('&#039;', '')}</h2>
             <Options
                 question={question}
                 dispatch={dispatch}
