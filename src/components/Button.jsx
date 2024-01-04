@@ -2,7 +2,7 @@ export default function Button({ question, answer, dispatch, userAnswer, hasAnsw
 
     return (
         <button
-            className={`btn btn-primary mx-2
+            className={`btn btn-primary m-2
             ${hasAnswered &&
                 (question.correct_answer === answer ? " btn-success" :
                     userAnswer === answer ? " btn-danger" : " btn-warning")}`}
