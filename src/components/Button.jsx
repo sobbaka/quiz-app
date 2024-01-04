@@ -7,6 +7,7 @@ export default function Button({ question, answer, dispatch, userAnswer, hasAnsw
                 (question.correct_answer === answer ? " btn-success" :
                     userAnswer === answer ? " btn-danger" : " btn-warning")}`}
             onClick={() => dispatch({ type: 'answer', payload: answer })}
+            disabled={hasAnswered}
         >
             {answer}
         </button>
