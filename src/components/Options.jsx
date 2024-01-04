@@ -4,7 +4,7 @@ export default function Options({ question, userAnswer, hasAnswered, dispatch, a
 
     return (
         <>
-            <div>
+            <div className="d-flex justify-content-center flex-column flex-sm-row w-100">
                 {answers.map((answer) =>
                     <Button
                         question={question}

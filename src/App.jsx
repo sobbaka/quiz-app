@@ -88,9 +88,6 @@ function App() {
     <>
 
       <div className="container d-flex flex-column align-items-center mx-auto">
-
-
-
         {status === 'ready' && <StartScreen dispatch={dispatch} />}
         {status === 'active' &&
           <>

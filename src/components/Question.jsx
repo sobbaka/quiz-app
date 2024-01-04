@@ -18,7 +18,7 @@ export default function Question({ questions, index, dispatch, userAnswer, answe
 
 
     return (
-        <>
+        <div className="custom__question d-flex flex-column align-items-center mx-auto">
             <ProgressBar index={index} length={questions.length} hasAnswered={hasAnswered} />
             <h2 className="mt-4 mb-3 text-center">{question.question.replaceAll('&quot;', '').replaceAll('&#039;', '')}</h2>
             <Options
@@ -28,8 +28,10 @@ export default function Question({ questions, index, dispatch, userAnswer, answe
                 answers={answers}
                 hasAnswered={hasAnswered}
             />
-            {questions.length - 1 > index ?
-                hasAnswered && <NextButton dispatch={dispatch} /> : hasAnswered && <FinishButton dispatch={dispatch} />}
-        </>
+            {
+                questions.length - 1 > index ?
+                    hasAnswered && <NextButton dispatch={dispatch} /> : hasAnswered && <FinishButton dispatch={dispatch} />
+            }
+        </div >
     )
 }
