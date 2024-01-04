@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Options from "./Options";
 import NextButton from "./NextButton";
 import FinishButton from "./FinishButton";
+import ProgressBar from "./ProgressBar";
 
 const shuffle = (array) => {
     array.forEach((element) => element.replaceAll('&quot;', '').replaceAll('&#039;', ''))
@@ -18,6 +19,7 @@ export default function Question({ questions, index, dispatch, userAnswer, answe
 
     return (
         <>
+            <ProgressBar index={index} length={questions.length} hasAnswered={hasAnswered} />
             <h2 className="mt-4 mb-3 text-center">{question.question.replaceAll('&quot;', '').replaceAll('&#039;', '')}</h2>
             <Options
                 question={question}

@@ -85,17 +85,23 @@ function App() {
 
 
   return (
-    <div className="container d-flex flex-column align-items-center mx-auto">
-      {status === 'ready' && <StartScreen dispatch={dispatch} />}
-      {status === 'active' &&
-        <>
-          <Question dispatch={dispatch} questions={questions} index={index} userAnswer={userAnswer} answers={answers} />
-          <h6 className="mt-2">Your score is {points}</h6>
-        </>
-      }
-      {status === 'loadFailed' && <h2>Data load failed</h2>}
-      {status === 'finished' && <FinalScreen points={points} highscore={highscore} dispatch={dispatch} />}
-    </div>
+    <>
+
+      <div className="container d-flex flex-column align-items-center mx-auto">
+
+
+
+        {status === 'ready' && <StartScreen dispatch={dispatch} />}
+        {status === 'active' &&
+          <>
+            <Question dispatch={dispatch} questions={questions} index={index} userAnswer={userAnswer} answers={answers} />
+            <h6 className="mt-2">Your score is {points}</h6>
+          </>
+        }
+        {status === 'loadFailed' && <h2>Data load failed</h2>}
+        {status === 'finished' && <FinalScreen points={points} highscore={highscore} dispatch={dispatch} />}
+      </div>
+    </>
   )
 }
 
