@@ -1,1 +1,16 @@
 @import "~bootstrap/scss/bootstrap.scss";
+
+.custom-container {
+    padding-top: 200px;
+}
+
+.custom__h1-start,
+.custom__question {
+    padding-top: 200px;
+}
+
+@media (max-width: 600px) {
+    .custom__question {
+        padding-top: 50px;
+    }
+}
