@@ -2,6 +2,7 @@ import { useEffect, useReducer } from "react"
 import StartScreen from "./components/StartScreen"
 import Question from "./components/Question"
 import FinalScreen from "./components/FinalScreen"
+import he from 'he';
 
 const initialState = {
   questions: [],
@@ -16,7 +17,6 @@ const initialState = {
 }
 
 function reducer(state, action) {
-
   switch (action.type) {
     case 'loading':
       return { ...state }
@@ -38,7 +38,7 @@ function reducer(state, action) {
       return {
         ...state,
         userAnswer: action.payload,
-        points: action.payload === state.questions[state.index].correct_answer ?
+        points: he.decode(action.payload) === he.decode(state.questions[state.index].correct_answer) ?
           state.points + 1 :
           state.points
       }
@@ -49,7 +49,7 @@ function reducer(state, action) {
   }
 }
 
-// 
+
 
 function App() {
 

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import he from 'he';
 import Options from "./Options";
 import NextButton from "./NextButton";
 import FinishButton from "./FinishButton";
@@ -20,7 +21,7 @@ export default function Question({ questions, index, dispatch, userAnswer, answe
     return (
         <div className="custom__question d-flex flex-column align-items-center mx-auto">
             <ProgressBar index={index} length={questions.length} hasAnswered={hasAnswered} />
-            <h2 className="mt-4 mb-3 text-center">{question.question.replaceAll('&quot;', '').replaceAll('&#039;', '')}</h2>
+            <h2 className="mt-4 mb-3 text-center">{he.decode(question.question)}</h2>
             <Options
                 question={question}
                 dispatch={dispatch}
