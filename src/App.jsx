@@ -50,26 +50,20 @@ function reducer(state, action) {
 }
 
 
-
 function App() {
-
   const [{ questions, status, index, answers, userAnswer, points, highscore }, dispatch] = useReducer(reducer, initialState)
-
   useEffect(function () {
-
     const fetchData = async () => {
       try {
         const response = await fetch('https://opentdb.com/api.php?amount=15&category=11&difficulty=easy&type=multiple');
-
         if (response.status === 429) {
           // Handle rate limiting by waiting for a certain period before retrying
-          await new Promise(resolve => setTimeout(resolve, 5000)); // You can adjust the delay as needed
-          fetchData(); // Retry the request
+          await new Promise(resolve => setTimeout(resolve, 5000));
+          fetchData();
         } else if (response.ok) {
           const data = await response.json();
           dispatch({ type: 'dataReceived', payload: data.results });
         } else {
-          // Handle other errors
           dispatch({ type: 'dataFailed' });
         }
       } catch (error) {
@@ -86,7 +80,6 @@ function App() {
 
   return (
     <>
-
       <div className="container d-flex flex-column align-items-center mx-auto">
         {status === 'ready' && <StartScreen dispatch={dispatch} />}
         {status === 'active' &&
