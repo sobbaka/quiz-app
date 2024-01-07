@@ -10,12 +10,21 @@ const shuffle = (array) => {
     return array.sort(() => Math.random() - 0.5);
 };
 
+const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+};
 
 
 export default function Question({ questions, index, dispatch, userAnswer, answers }) {
     const question = questions[index]
     const hasAnswered = userAnswer != null
     useEffect(() => dispatch({ type: 'setAnswers', payload: shuffle([question.correct_answer, ...question.incorrect_answers]) }), [question])
+    useEffect(() => dispatch({ type: 'setBackground', payload: getRandomColor() }), [index])
 
 
     return (

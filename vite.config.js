@@ -6,6 +6,7 @@ import { resolve } from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './',
+  publicDir: 'docs',
   resolve: {
     alias: {
       '~bootstrap': resolve(__dirname, 'node_modules/bootstrap'),

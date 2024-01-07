@@ -10,6 +10,7 @@ const initialState = {
   status: 'loading',
   index: 0,
   userAnswer: null,
+  background: null,
   answers: [],
   points: 0,
   highscore: 0,
@@ -28,6 +29,8 @@ function reducer(state, action) {
       return { ...state, status: 'loadFailed' }
     case 'active':
       return { ...state, status: 'active' }
+    case 'setBackground':
+      return { ...state, background: action.payload }
     case 'setAnswers':
       return { ...state, answers: action.payload, userAnswer: null }
     case 'finish':
@@ -51,7 +54,8 @@ function reducer(state, action) {
 
 
 function App() {
-  const [{ questions, status, index, answers, userAnswer, points, highscore }, dispatch] = useReducer(reducer, initialState)
+  const [{ questions, status, index, answers, userAnswer, points, highscore, background }, dispatch] = useReducer(reducer, initialState)
+
   useEffect(function () {
     const fetchData = async () => {
       try {

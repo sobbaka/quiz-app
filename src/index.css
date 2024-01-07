@@ -9,6 +9,10 @@
     padding-top: 200px;
 }
 
+.custom__question {
+    width: 100%;
+}
+
 @media (max-width: 600px) {
     .custom__question {
         padding-top: 50px;
