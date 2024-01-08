@@ -3,6 +3,7 @@ import StartScreen from "./components/StartScreen"
 import Question from "./components/Question"
 import FinalScreen from "./components/FinalScreen"
 import he from 'he';
+import Timer from "./components/Timer";
 
 const initialState = {
   questions: [],
@@ -22,13 +23,15 @@ function reducer(state, action) {
     case 'loading':
       return { ...state }
     case 'dataReceived':
-      return { ...state, status: 'ready', questions: action.payload, time: 30 * action.payload.length }
+      return { ...state, status: 'ready', questions: action.payload, time: 60 * action.payload.length }
     case 'restart':
-      return { ...state, status: 'ready', questions: action.payload, time: 30 * action.payload.length, index: 0, userAnswer: null, points: 0 }
+      return { ...state, status: 'ready', questions: action.payload, time: 60 * action.payload.length, index: 0, userAnswer: null, points: 0 }
     case 'dataFailed':
       return { ...state, status: 'loadFailed' }
     case 'active':
       return { ...state, status: 'active' }
+    case 'tick':
+      return { ...state, time: state.time - 1, status: state.time < 0 ? 'finished' : state.status }
     case 'setBackground':
       return { ...state, background: action.payload }
     case 'setAnswers':
@@ -54,7 +57,7 @@ function reducer(state, action) {
 
 
 function App() {
-  const [{ questions, status, index, answers, userAnswer, points, highscore, background }, dispatch] = useReducer(reducer, initialState)
+  const [{ questions, status, index, answers, userAnswer, points, highscore, time }, dispatch] = useReducer(reducer, initialState)
 
   useEffect(function () {
     const fetchData = async () => {
@@ -88,6 +91,7 @@ function App() {
         {status === 'ready' && <StartScreen dispatch={dispatch} />}
         {status === 'active' &&
           <>
+            <Timer time={time} dispatch={dispatch} />
             <Question dispatch={dispatch} questions={questions} index={index} userAnswer={userAnswer} answers={answers} />
             <h6 className="mt-2">Your score is {points}</h6>
           </>
