@@ -4,6 +4,7 @@ import Question from "./components/Question"
 import FinalScreen from "./components/FinalScreen"
 import he from 'he';
 import Timer from "./components/Timer";
+import Loader from "./components/Loader";
 
 const initialState = {
   questions: [],
@@ -21,13 +22,13 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case 'loading':
-      return { ...state }
+      return { ...state, status: action.payload }
     case 'dataReceived':
       return { ...state, status: 'ready', questions: action.payload, time: 60 * action.payload.length }
     case 'restart':
       return { ...state, status: 'ready', questions: action.payload, time: 60 * action.payload.length, index: 0, userAnswer: null, points: 0 }
     case 'dataFailed':
-      return { ...state, status: 'loadFailed' }
+      return { ...state, status: 'loading' }
     case 'active':
       return { ...state, status: 'active' }
     case 'tick':
@@ -88,6 +89,7 @@ function App() {
   return (
     <>
       <div className="container d-flex flex-column align-items-center mx-auto">
+        {status === 'loading' && <Loader />}
         {status === 'ready' && <StartScreen dispatch={dispatch} />}
         {status === 'active' &&
           <>

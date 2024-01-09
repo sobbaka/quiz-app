@@ -5,7 +5,8 @@
 }
 
 .custom__h1-start,
-.custom__timer {
+.custom__timer,
+.custom__loader {
     padding-top: 200px;
 }
 
