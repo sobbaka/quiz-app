@@ -1,8 +1,10 @@
 import { useEffect, useReducer } from "react"
+import hexToRgba from 'hex-to-rgba';
+import he from 'he';
+
 import StartScreen from "./components/StartScreen"
 import Question from "./components/Question"
 import FinalScreen from "./components/FinalScreen"
-import he from 'he';
 import Timer from "./components/Timer";
 import Loader from "./components/Loader";
 
@@ -24,9 +26,9 @@ function reducer(state, action) {
     case 'loading':
       return { ...state, status: action.payload }
     case 'dataReceived':
-      return { ...state, status: 'ready', questions: action.payload, time: 60 * action.payload.length }
+      return { ...state, status: 'ready', questions: action.payload, time: 60 * action.payload.length, background: null }
     case 'restart':
-      return { ...state, status: 'ready', questions: action.payload, time: 60 * action.payload.length, index: 0, userAnswer: null, points: 0 }
+      return { ...state, status: 'ready', questions: action.payload, time: 60 * action.payload.length, index: 0, userAnswer: null, points: 0, background: null }
     case 'dataFailed':
       return { ...state, status: 'loading' }
     case 'active':
@@ -34,7 +36,7 @@ function reducer(state, action) {
     case 'tick':
       return { ...state, time: state.time - 1, status: state.time < 0 ? 'finished' : state.status }
     case 'setBackground':
-      return { ...state, background: action.payload }
+      return { ...state, background: hexToRgba(action.payload, '0.4') }
     case 'setAnswers':
       return { ...state, answers: action.payload, userAnswer: null }
     case 'finish':
@@ -58,7 +60,7 @@ function reducer(state, action) {
 
 
 function App() {
-  const [{ questions, status, index, answers, userAnswer, points, highscore, time }, dispatch] = useReducer(reducer, initialState)
+  const [{ questions, status, index, answers, userAnswer, points, highscore, time, background }, dispatch] = useReducer(reducer, initialState)
 
   useEffect(function () {
     const fetchData = async () => {
@@ -84,24 +86,24 @@ function App() {
   }, [])
 
 
-
-
   return (
-    <>
-      <div className="container d-flex flex-column align-items-center mx-auto">
-        {status === 'loading' && <Loader />}
-        {status === 'ready' && <StartScreen dispatch={dispatch} />}
-        {status === 'active' &&
-          <>
-            <Timer time={time} dispatch={dispatch} />
-            <Question dispatch={dispatch} questions={questions} index={index} userAnswer={userAnswer} answers={answers} />
-            <h6 className="mt-2">Your score is {points}</h6>
-          </>
-        }
-        {status === 'loadFailed' && <h2>Data load failed</h2>}
-        {status === 'finished' && <FinalScreen points={points} highscore={highscore} dispatch={dispatch} />}
+    <div className={`wrapper ${status === 'finished' ? 'custom__finish' : ''} ${status === 'ready' ? 'custom__start' : ''}`}>
+      <div className={`main`} style={{ backgroundColor: background }}>
+        <div className='container d-flex flex-column align-items-center mx-auto rounded-3 p-3'>
+          {status === 'loading' && <Loader />}
+          {status === 'ready' && <StartScreen dispatch={dispatch} />}
+          {status === 'active' &&
+            <>
+              <Timer time={time} dispatch={dispatch} />
+              <Question dispatch={dispatch} questions={questions} index={index} userAnswer={userAnswer} answers={answers} />
+              <h6 className="mt-2">Your score is {points}</h6>
+            </>
+          }
+          {status === 'loadFailed' && <h2>Data load failed</h2>}
+          {status === 'finished' && <FinalScreen points={points} highscore={highscore} dispatch={dispatch} />}
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 

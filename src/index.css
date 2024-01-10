@@ -1,17 +1,41 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
-.custom-container {
-    padding-top: 200px;
+.wrapper {
+    height: 100vh;
+    background-image: url("./basic.jpg");
+    background-size: cover;
 }
 
-.custom__h1-start,
+.custom__start {
+    background-image: url("./start.jpg");
+}
+
+.custom__finish {
+    background-image: url("./final-2.jpg");
+    background-size: cover;
+}
+
+.main {
+    padding-top: 200px;
+    /* background-color: rgba(177, 134, 218, 0.521); */
+    height: 100vh;
+    /* background-image: url("./final.jpg"); */
+}
+
+.container {
+    /* padding-top: 200px; */
+    background-color: rgba(255, 255, 255, 0.603);
+}
+
+/* .custom__h1-start,
 .custom__timer,
 .custom__loader {
-    padding-top: 200px;
-}
+    margin-top: 200px;
+} */
 
 .custom__question {
     width: 100%;
+
 }
 
 @media (max-width: 600px) {
