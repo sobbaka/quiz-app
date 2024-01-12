@@ -85,22 +85,24 @@ function App() {
     fetchData();
   }, [])
 
-
+  // container p-3 d-flex align-items-center  rounded-3 p-3  
   return (
     <div className={`wrapper ${status === 'finished' ? 'custom__finish' : ''} ${status === 'ready' ? 'custom__start' : ''}`}>
       <div className={`main`} style={{ backgroundColor: background }}>
-        <div className='container d-flex flex-column align-items-center mx-auto rounded-3 p-3'>
-          {status === 'loading' && <Loader />}
-          {status === 'ready' && <StartScreen dispatch={dispatch} />}
-          {status === 'active' &&
-            <>
-              <Timer time={time} dispatch={dispatch} />
-              <Question dispatch={dispatch} questions={questions} index={index} userAnswer={userAnswer} answers={answers} />
-              <h6 className="mt-2">Your score is {points}</h6>
-            </>
-          }
-          {status === 'loadFailed' && <h2>Data load failed</h2>}
-          {status === 'finished' && <FinalScreen points={points} highscore={highscore} dispatch={dispatch} />}
+        <div className='container p-3 d-flex justify-content-center align-items-center flex-column'>
+          <div className="window d-flex justify-content-center align-items-center flex-column p-3 rounded">
+            {status === 'loading' && <Loader />}
+            {status === 'ready' && <StartScreen dispatch={dispatch} />}
+            {status === 'active' &&
+              <>
+                <Timer time={time} dispatch={dispatch} />
+                <Question dispatch={dispatch} questions={questions} index={index} userAnswer={userAnswer} answers={answers} />
+                <h6 className="mt-2">Your score is {points}</h6>
+              </>
+            }
+            {status === 'loadFailed' && <h2>Data load failed</h2>}
+            {status === 'finished' && <FinalScreen points={points} highscore={highscore} dispatch={dispatch} />}
+          </div>
         </div>
       </div>
     </div>

@@ -1,9 +1,15 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
 .wrapper {
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     background-image: url("./basic.jpg");
     background-size: cover;
+    display: flex;
+}
+
+.main {
+    flex: 1;
 }
 
 .custom__start {
@@ -15,31 +21,22 @@
     background-size: cover;
 }
 
-.main {
-    padding-top: 200px;
-    /* background-color: rgba(177, 134, 218, 0.521); */
-    height: 100vh;
-    /* background-image: url("./final.jpg"); */
+.container {
+    height: 100%;
 }
 
-.container {
-    /* padding-top: 200px; */
+.window {
+    width: 100%;
     background-color: rgba(255, 255, 255, 0.603);
 }
-
-/* .custom__h1-start,
-.custom__timer,
-.custom__loader {
-    margin-top: 200px;
-} */
 
 .custom__question {
     width: 100%;
 
 }
 
-@media (max-width: 600px) {
-    .custom__question {
-        padding-top: 50px;
+@media (max-width: 576px) {
+    .wrapper {
+        padding-top: 0px;
     }
 }
