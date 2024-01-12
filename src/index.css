@@ -3,7 +3,7 @@
 .wrapper {
     height: 100%;
     min-height: 100vh;
-    background-image: url("./basic.jpg");
+    background-image: url("/basic.jpg");
     background-size: cover;
     display: flex;
 }
@@ -13,11 +13,11 @@
 }
 
 .custom__start {
-    background-image: url("./start.jpg");
+    background-image: url("/start.jpg");
 }
 
 .custom__finish {
-    background-image: url("./final-2.jpg");
+    background-image: url("/final-2.jpg");
     background-size: cover;
 }
 
@@ -32,7 +32,6 @@
 
 .custom__question {
     width: 100%;
-
 }
 
 @media (max-width: 576px) {
